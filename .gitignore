@@ -1,0 +1,9 @@
+env/
+__pycache__/
+*.py[cod]
+*.pot
+
+
+/face-detect/data/
+
+
