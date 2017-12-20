@@ -6,7 +6,8 @@ face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 eye_cascade = cv2.CascadeClassifier('haarcascade_eye.xml')
 
 cap = cv2.VideoCapture(0)
-# more explain arguments
+## more explain arguments
+
 #color = (255,0,0)
 #startPoint = (x,y)
 #endPoint = (x+w,y+h)
