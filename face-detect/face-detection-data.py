@@ -18,6 +18,8 @@ while 1:
         cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),2)
         only_face = gray[y:y+h,x:x+w]
         cv2.imwrite("data/user."+str(id)+".jpg", only_face)
+        
+        cv2.putText(img,"Firas", (x,y-10), cv2.FONT_HERSHEY_SIMPLEX, 2, 255)
 
    
     cv2.imshow('live video',img)
