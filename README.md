@@ -10,7 +10,7 @@
 * Numpy
 
 #### Installing
-[Source Code ](https://https://github.com/firchatn/opencv-simple.git)
+[Source Code ](https://https://github.com/firchatn/opencv-simple.git) https://https://github.com/firchatn/opencv-simple.git
 
 or
 
