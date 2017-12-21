@@ -3,11 +3,11 @@
 
 #### Prerequisites
 
-..* Python 2.x , 3.x
+* Python 2.x , 3.x
 
-⋅⋅* OpenCV 2.x
+* OpenCV 2.x
 
-⋅⋅* Numpy
+* Numpy
 
 #### Installing
 [Source Code ](https://https://github.com/firchatn/opencv-simple.git)
