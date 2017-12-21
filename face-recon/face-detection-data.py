@@ -29,7 +29,12 @@ def write_data():
             cv2.destroyAllWindows()
 
 def train_data():
-    pass
+    faces,Ids = getImagesAndLabels('dataSet')
+    recognizer.train(faces, np.array(Ids))
+    recognizer.save('trainner/trainner.yml')
+    face_recognizer = cv2.face.createLBPHFaceRecognizer()
+    face_recognizer.train(faces, np.array(labels))
+    
 
 
 def recon_data():
