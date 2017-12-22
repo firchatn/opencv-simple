@@ -1,6 +1,7 @@
 import numpy as np
 import cv2
 import os
+import os.path
 
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 cap = cv2.VideoCapture(0)
@@ -29,9 +30,17 @@ def write_data():
             cv2.destroyAllWindows()
 
 def train_data():
-    faces,Ids = getImagesAndLabels('dataSet')
-    recognizer.train(faces, np.array(Ids))
-    recognizer.save('trainner/trainner.yml')
+    faces = []
+    labels =[ 1,2,3 ]
+    
+    dirs = os.listdir('./data')
+    for dir in dirs:
+        face = np.array(10)
+        for i in range(20):
+            face = cv2.imread('data/{0}/{1}.jpg'.format(dir,i+1))
+            #cv2.imshow('face'+str(i),face)
+        faces.append(face)
+    
     face_recognizer = cv2.face.createLBPHFaceRecognizer()
     face_recognizer.train(faces, np.array(labels))
     
