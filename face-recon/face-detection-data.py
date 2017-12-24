@@ -38,6 +38,7 @@ def train_data():
         face = np.array(10)
         for i in range(20):
             face = cv2.imread('data/{0}/{1}.jpg'.format(dir,i+1))
+            print(face)
             #cv2.imshow('face'+str(i),face)
         faces.append(face)
     

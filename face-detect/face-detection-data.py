@@ -15,7 +15,7 @@ while 1:
     faces = face_cascade.detectMultiScale(gray, 1.3, 5)
 
     for (x,y,w,h) in faces:
-        cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),2)
+        cv2.rectangle(img,(x,y),(x+w,y+h),(255,250,250),2)
         only_face = gray[y:y+h,x:x+w]
         cv2.imwrite("data/user."+str(id)+".jpg", only_face)
         
