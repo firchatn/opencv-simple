@@ -9,7 +9,7 @@ imgf = cv2.imread('1.png')
 resf = cv2.resize(imgf,None,fx=0.2, fy=0.2, interpolation = cv2.INTER_CUBIC)
 t = 0 # time
 def too_passed(oldepoch):
-    return time.time() - oldepoch >= 3
+    return time.time() - oldepoch >= 5
 while 1:
     ret, img = cap.read()
     only_face = np.array(10)
@@ -49,7 +49,7 @@ while 1:
                 pass
             
             
-        if a in only_face and x in only_face:
+        if a in only_face :
             print("ok")
             score -=10 
     cv2.putText(img,"Score"+str(score), (100,100), cv2.FONT_HERSHEY_SIMPLEX, 2, 255)
