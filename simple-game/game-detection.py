@@ -1,13 +1,15 @@
 import numpy as np
 import cv2
-from random import randrange
-
+import random 
+import time
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 cap = cv2.VideoCapture(0)
 score = 100
 imgf = cv2.imread('1.png')
 resf = cv2.resize(imgf,None,fx=0.2, fy=0.2, interpolation = cv2.INTER_CUBIC)
 
+def too_passed(oldepoch):
+    return time.time() - oldepoch >= 30
 while 1:
     ret, img = cap.read()
     only_face = np.array(10)
@@ -18,9 +20,15 @@ while 1:
         cv2.rectangle(img,(x,y),(x+w,y+h),(255,250,250),2)
         only_face = gray[y:y+h,x:x+w]
 
-        px = 10
-        py = 10
+        
         rows,cols,channels = resf.shape
+        rows1,cols1,channels1 = img.shape
+        print(rows1)
+        print(cols1)
+        x1 = random.randint(1,rows1)
+        x2 = random.randint(1,rows1)
+        y1 = random.randint(1,cols1)
+        y2 = random.randint(1,cols1)
         roi = img[0:rows, 0:cols ]
         img2gray = cv2.cvtColor(resf,cv2.COLOR_BGR2GRAY)
         ret, mask = cv2.threshold(img2gray, 0, 255, cv2.THRESH_BINARY)
@@ -29,8 +37,20 @@ while 1:
         img2_fg = cv2.bitwise_and(resf,resf,mask = mask)
         dst = cv2.add(img1_bg,img2_fg)
         img[0:rows, 0:cols ] = dst
-        
+
+        v = 0
+        if too_passed(v):
+            print("ok")
+            
+            try:
+                img[x1:x1+resf.shape[0], x1:x1+resf.shape[1]] = dst
+                v = time.time()
+            except Exception:
+                pass
+            
+            
         if dst in only_face:
+            print("ok")
             score -=10 
     cv2.putText(img,"Score"+str(score), (100,100), cv2.FONT_HERSHEY_SIMPLEX, 2, 255)
 
