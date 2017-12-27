@@ -43,13 +43,13 @@ while 1:
             print("ok")
             
             try:
-                img[x1:x1+resf.shape[0], x1:x1+resf.shape[1]] = dst
+                a = img[x1:x1+resf.shape[0], x1:x1+resf.shape[1]] = dst
                 t = time.time()
             except Exception:
                 pass
             
             
-        if dst in only_face:
+        if a in only_face and x in only_face:
             print("ok")
             score -=10 
     cv2.putText(img,"Score"+str(score), (100,100), cv2.FONT_HERSHEY_SIMPLEX, 2, 255)
