@@ -17,23 +17,21 @@ while 1:
     for (x,y,w,h) in faces:
         cv2.rectangle(img,(x,y),(x+w,y+h),(255,250,250),2)
         only_face = gray[y:y+h,x:x+w]
-        #img[y:y+h,x:x+w] = resf
-        #dst = cv2.addWeighted(img,0.7,resf,0.3,0)
 
-
+        px = 10
+        py = 10
         rows,cols,channels = resf.shape
         roi = img[0:rows, 0:cols ]
         img2gray = cv2.cvtColor(resf,cv2.COLOR_BGR2GRAY)
-        ret, mask = cv2.threshold(img2gray, 10, 255, cv2.THRESH_BINARY)
+        ret, mask = cv2.threshold(img2gray, 0, 255, cv2.THRESH_BINARY)
         mask_inv = cv2.bitwise_not(mask)
         img1_bg = cv2.bitwise_and(roi,roi,mask = mask_inv)
         img2_fg = cv2.bitwise_and(resf,resf,mask = mask)
         dst = cv2.add(img1_bg,img2_fg)
         img[0:rows, 0:cols ] = dst
-        #img[2:rows, 2:cols ] = dst
-        if dst in only_face:
-            score -=10
         
+        if dst in only_face:
+            score -=10 
     cv2.putText(img,"Score"+str(score), (100,100), cv2.FONT_HERSHEY_SIMPLEX, 2, 255)
 
    
