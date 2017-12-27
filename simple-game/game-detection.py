@@ -7,9 +7,9 @@ cap = cv2.VideoCapture(0)
 score = 100
 imgf = cv2.imread('1.png')
 resf = cv2.resize(imgf,None,fx=0.2, fy=0.2, interpolation = cv2.INTER_CUBIC)
-
+t = 0 # time
 def too_passed(oldepoch):
-    return time.time() - oldepoch >= 30
+    return time.time() - oldepoch >= 3
 while 1:
     ret, img = cap.read()
     only_face = np.array(10)
@@ -38,13 +38,13 @@ while 1:
         dst = cv2.add(img1_bg,img2_fg)
         img[0:rows, 0:cols ] = dst
 
-        v = 0
-        if too_passed(v):
+        
+        if too_passed(t):
             print("ok")
             
             try:
                 img[x1:x1+resf.shape[0], x1:x1+resf.shape[1]] = dst
-                v = time.time()
+                t = time.time()
             except Exception:
                 pass
             
