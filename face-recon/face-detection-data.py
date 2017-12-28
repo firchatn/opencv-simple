@@ -32,7 +32,6 @@ def write_data():
             cv2.destroyAllWindows()
 
 def train_data():
-    
     images = []
     labels =[]
     dirs = os.listdir('./data')
