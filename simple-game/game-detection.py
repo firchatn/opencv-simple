@@ -50,7 +50,7 @@ while 1 and score >= 0:
                 pass
             
             
-        if x1 > x  :
+        if x1 in only_face  :
             print("ok")
             score -=10 
     cv2.putText(img,"Score"+str(score), (100,100), cv2.FONT_HERSHEY_SIMPLEX, 2, 255)
