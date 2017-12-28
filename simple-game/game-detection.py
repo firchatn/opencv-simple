@@ -2,6 +2,7 @@ import numpy as np
 import cv2
 import random 
 import time
+
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 cap = cv2.VideoCapture(0)
 score = 100
@@ -9,8 +10,8 @@ imgf = cv2.imread('1.png')
 resf = cv2.resize(imgf,None,fx=0.2, fy=0.2, interpolation = cv2.INTER_CUBIC)
 t = 0 # time
 def too_passed(oldepoch):
-    return time.time() - oldepoch >= 5
-while 1:
+    return time.time() - oldepoch >= 2
+while 1 and score >= 0:
     ret, img = cap.read()
     only_face = np.array(10)
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -49,7 +50,7 @@ while 1:
                 pass
             
             
-        if a in only_face :
+        if x1 > x  :
             print("ok")
             score -=10 
     cv2.putText(img,"Score"+str(score), (100,100), cv2.FONT_HERSHEY_SIMPLEX, 2, 255)
@@ -57,9 +58,8 @@ while 1:
    
     cv2.imshow('live video',img)
     
-    k = cv2.waitKey(30) & 0xff
-    if k == 27:
-        break
+    cv2.waitKey(30) & 0xff
+    
 
 cap.release()
 cv2.destroyAllWindows()
