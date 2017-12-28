@@ -31,6 +31,6 @@ def show_frame(*args):
                                         frame.shape[2]*frame.shape[1])                            
     image.set_from_pixbuf(pb.copy())
     return True
- 
+
 GLib.idle_add(show_frame)
 Gtk.main()
