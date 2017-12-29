@@ -25,7 +25,7 @@ def write_data():
             cv2.imwrite("data/user"+str(id)+"/"+str(nb)+".jpg", only_face)
         cv2.imshow('live video',img)
         
-        cv2.waitKey(100)
+        cv2.waitKey(1)
         if nb == 20:
             break
             cap.release()
@@ -58,9 +58,14 @@ def train_data():
 def recon_data():
     while True:
         ret, im =cap.read()
+        print("ok")
         gray=cv2.cvtColor(im,cv2.COLOR_BGR2GRAY)
         faces=face_cascade.detectMultiScale(gray, scaleFactor=1.2, minNeighbors=5, minSize=(100, 100), flags=cv2.CASCADE_SCALE_IMAGE)
+        print("ok2")
+        print(faces)
+        #faces = face_cascade.detectMultiScale(gray, 1.3, 5)
         for(x,y,w,h) in faces:
+            print("oki3")
             id_user, conf = face_recognizer.predict(gray[y:y+h,x:x+w])
             cv2.rectangle(im,(x-50,y-50),(x+w+50,y+h+50),(225,0,0),2)
             if(id_user==1):

@@ -8,3 +8,6 @@ __pycache__/
 
 /face-recon/data/
 /face-recon/data/*
+
+/face-recon/trainer/
+/face-recon/trainer/*
