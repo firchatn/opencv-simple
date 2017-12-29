@@ -24,7 +24,6 @@ def write_data():
             only_face = gray[y:y+h,x:x+w]
             cv2.imwrite("data/user"+str(id)+"/"+str(nb)+".jpg", only_face)
         cv2.imshow('live video',img)
-        
         cv2.waitKey(1)
         if nb == 20:
             break
@@ -35,21 +34,18 @@ def train_data():
     images = []
     labels =[]
     dirs = os.listdir('./data')
-    
     for dir in dirs:
         for i in range(20):
             face = cv2.imread('data/{0}/{1}.jpg'.format(dir,i+1))
             image_pil = Image.open('data/{0}/{1}.jpg'.format(dir,i+1)).convert('L')
             image = np.array(image_pil, 'uint8')
             nbr = int(dir[4:])
-            print(nbr)
             faces = face_cascade.detectMultiScale(image)
             for (x, y, w, h) in faces:
                 images.append(image[y: y + h, x: x + w])
                 labels.append(nbr)
                 cv2.imshow("Adding faces to traning set...", image[y: y + h, x: x + w])
                 cv2.waitKey(10)
-
     face_recognizer.train(images, np.array(labels))
     face_recognizer.save('trainer/trainer.yml')
     cv2.destroyAllWindows()
@@ -62,13 +58,12 @@ def recon_data():
         faces=face_cascade.detectMultiScale(gray, scaleFactor=1.2, minNeighbors=5, minSize=(100, 100), flags=cv2.CASCADE_SCALE_IMAGE)
         for(x,y,w,h) in faces:
             id_user, conf = face_recognizer.predict(gray[y:y+h,x:x+w])
-            cv2.rectangle(im,(x-50,y-50),(x+w+50,y+h+50),(225,0,0),2)
+            cv2.rectangle(im,(x-10,y-10),(x+w+10,y+h+10),(225,255,255),2)
             if(id_user==1):
                  id_user='Firas'
             elif(id_user==2):
                  id_user='Moez'
-            
-            cv2.putText(im,str(id_user), (x,y-15), cv2.FONT_HERSHEY_SCRIPT_COMPLEX, 2, 255)
+            cv2.putText(im,str(id_user), (x,y-15), cv2.FONT_HERSHEY_SCRIPT_COMPLEX, 2, 25)
             cv2.imshow('im',im)
             cv2.waitKey(10)
 
