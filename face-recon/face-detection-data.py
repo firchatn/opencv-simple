@@ -61,7 +61,6 @@ def recon_data():
         gray=cv2.cvtColor(im,cv2.COLOR_BGR2GRAY)
         faces=face_cascade.detectMultiScale(gray, scaleFactor=1.2, minNeighbors=5, minSize=(100, 100), flags=cv2.CASCADE_SCALE_IMAGE)
         for(x,y,w,h) in faces:
-            print("oki3")
             id_user, conf = face_recognizer.predict(gray[y:y+h,x:x+w])
             cv2.rectangle(im,(x-50,y-50),(x+w+50,y+h+50),(225,0,0),2)
             if(id_user==1):
@@ -69,7 +68,7 @@ def recon_data():
             elif(id_user==2):
                  id_user='Moez'
             
-            cv2.putText(im,str(id_user), (x,y-10), cv2.FONT_HERSHEY_SIMPLEX, 2, 255)
+            cv2.putText(im,str(id_user), (x,y-15), cv2.FONT_HERSHEY_SCRIPT_COMPLEX, 2, 255)
             cv2.imshow('im',im)
             cv2.waitKey(10)
 
