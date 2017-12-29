@@ -6,9 +6,26 @@ from PIL import Image
 
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 face_recognizer = cv2.face.createLBPHFaceRecognizer()
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 
-docs = { 1 : 'Firas' , 2 : 'Moez' }
+docs = { 1 : 'Firas' , 2 : 'Moez' , 3 : 'Med Ali' }
+
+def write_data_static():
+    id= int(input('put id'))
+    nb = 0 
+    while nb < 20:
+        img = cv2.imread('../images/ali.jpg')
+        only_face = np.array(10)
+        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        faces = face_cascade.detectMultiScale(gray, 1.3, 5)
+        for (x,y,w,h) in faces:
+            nb +=1
+            if nb ==1:
+                os.system('mkdir data/user{0}'.format(id))
+            cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),2)
+            only_face = gray[y:y+h,x:x+w]
+            cv2.imwrite("data/user"+str(id)+"/"+str(nb)+".jpg", only_face)
+
 
 def write_data():
     id= int(input('put id'))
