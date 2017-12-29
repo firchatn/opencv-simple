@@ -41,7 +41,7 @@ def train_data():
             face = cv2.imread('data/{0}/{1}.jpg'.format(dir,i+1))
             image_pil = Image.open('data/{0}/{1}.jpg'.format(dir,i+1)).convert('L')
             image = np.array(image_pil, 'uint8')
-            nbr = int(dir[-1])
+            nbr = int(dir[4:])
             print(nbr)
             faces = face_cascade.detectMultiScale(image)
             for (x, y, w, h) in faces:
@@ -58,12 +58,8 @@ def train_data():
 def recon_data():
     while True:
         ret, im =cap.read()
-        print("ok")
         gray=cv2.cvtColor(im,cv2.COLOR_BGR2GRAY)
         faces=face_cascade.detectMultiScale(gray, scaleFactor=1.2, minNeighbors=5, minSize=(100, 100), flags=cv2.CASCADE_SCALE_IMAGE)
-        print("ok2")
-        print(faces)
-        #faces = face_cascade.detectMultiScale(gray, 1.3, 5)
         for(x,y,w,h) in faces:
             print("oki3")
             id_user, conf = face_recognizer.predict(gray[y:y+h,x:x+w])
