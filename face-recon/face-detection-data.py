@@ -37,7 +37,8 @@ def train_data():
     labels =[]
     dirs = os.listdir('./data')
     for dir in dirs:
-        for i in range(20):
+        nbimage = len(os.listdir('./data/{0}'.format(dir)))
+        for i in range(nbimage):
             face = cv2.imread('data/{0}/{1}.jpg'.format(dir,i+1))
             image_pil = Image.open('data/{0}/{1}.jpg'.format(dir,i+1)).convert('L')
             image = np.array(image_pil, 'uint8')
