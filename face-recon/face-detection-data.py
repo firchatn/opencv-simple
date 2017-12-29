@@ -8,6 +8,8 @@ face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 face_recognizer = cv2.face.createLBPHFaceRecognizer()
 cap = cv2.VideoCapture(0)
 
+docs = { 1 : 'Firas' , 2 : 'Moez' }
+
 def write_data():
     id= int(input('put id'))
     nb = 0 
@@ -59,11 +61,8 @@ def recon_data():
         for(x,y,w,h) in faces:
             id_user, conf = face_recognizer.predict(gray[y:y+h,x:x+w])
             cv2.rectangle(im,(x-10,y-10),(x+w+10,y+h+10),(225,255,255),2)
-            if(id_user==1):
-                 id_user='Firas'
-            elif(id_user==2):
-                 id_user='Moez'
-            cv2.putText(im,str(id_user), (x,y-15), cv2.FONT_HERSHEY_SCRIPT_COMPLEX, 2, 25)
+            name = docs[id_user]
+            cv2.putText(im,str(name), (x,y-15), cv2.FONT_HERSHEY_SCRIPT_COMPLEX, 2, 25)
             cv2.imshow('im',im)
             cv2.waitKey(10)
 
