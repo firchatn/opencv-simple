@@ -8,7 +8,7 @@ face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 cap = cv2.VideoCapture('video/outpy.avi')
 
 def save_detect_faces():
-    id= int(input('put id'))
+    id= int(input('video number : '))
     nb = 0 
     while 1:
         ret, img = cap.read()
