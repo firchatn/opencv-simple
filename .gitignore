@@ -11,3 +11,6 @@ __pycache__/
 
 /face-recon/trainer/
 /face-recon/trainer/*
+
+/video-analyser/video/
+/video-analyser/video/*

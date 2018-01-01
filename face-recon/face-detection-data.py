@@ -6,9 +6,9 @@ from PIL import Image
 
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 face_recognizer = cv2.face.createLBPHFaceRecognizer()
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(0)
 
-docs = { 1 : 'Firas' , 2 : 'Moez' , 3 : 'Med Ali' }
+docs = { 1 : 'Firas' , 2 : 'Moez' , 3 : 'Med Ali' , 4 : 'Moez 2' , 5 : 'Moez 3' }
 
 def write_data_static():
     id= int(input('put id'))
