@@ -12,6 +12,9 @@ builder.add_from_file("layout.glade")
 frame_width = int(cap.get(3))
 frame_height = int(cap.get(4))
 
+out = cv2.VideoWriter('outpy.avi',cv2.VideoWriter_fourcc('M','J','P','G'),
+                      10, (frame_width,frame_height))
+record_on = False
 
 
 class Handler:
@@ -26,11 +29,8 @@ builder.connect_signals(Handler())
 
 
 def record(new_action):
-    print('o')
-    out = cv2.VideoWriter('outpy.avi',cv2.VideoWriter_fourcc('M','J','P','G'),
-                      10, (frame_width,frame_height))
-    ret, frame = cap.read()
-    out.write(frame)
+    global record_on
+    record_on = True
     
 new_action = builder.get_object("s")
 new_action.connect("activate", record)
@@ -39,6 +39,9 @@ new_action.connect("activate", record)
     
 def show_frame(*args):
     ret, frame = cap.read()
+    if record_on :
+        out.write(frame)
+        
     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     pb = GdkPixbuf.Pixbuf.new_from_data(frame.tostring(),
                                         GdkPixbuf.Colorspace.RGB,
