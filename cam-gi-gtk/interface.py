@@ -11,7 +11,7 @@ builder.add_from_file("layout.glade")
 
 frame_width = int(cap.get(3))
 frame_height = int(cap.get(4))
-out = cv2.VideoWriter('video/outpy.avi',cv2.VideoWriter_fourcc('M','J','P','G'),
+out = cv2.VideoWriter('outpy.avi',cv2.VideoWriter_fourcc('M','J','P','G'),
                       10, (frame_width,frame_height))
 
 
@@ -26,9 +26,15 @@ window.show_all()
 builder.connect_signals(Handler())
 
 
-def record():
+def record(new_action):
+    print('o')
     ret, frame = cap.read()
     out.write(frame)
+    
+new_action = builder.get_object("s")
+new_action.connect("activate", record)
+
+
     
 def show_frame(*args):
     ret, frame = cap.read()
