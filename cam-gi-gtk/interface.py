@@ -9,6 +9,12 @@ cap = cv2.VideoCapture(0)
 builder = Gtk.Builder()
 builder.add_from_file("layout.glade")
 
+frame_width = int(cap.get(3))
+frame_height = int(cap.get(4))
+out = cv2.VideoWriter('video/outpy.avi',cv2.VideoWriter_fourcc('M','J','P','G'),
+                      10, (frame_width,frame_height))
+
+
 class Handler:
     def onDeleteWindow(self, *args):
         cap.release
@@ -18,7 +24,12 @@ window = builder.get_object("window1")
 image = builder.get_object("image1")
 window.show_all()
 builder.connect_signals(Handler())
- 
+
+
+def record():
+    ret, frame = cap.read()
+    out.write(frame)
+    
 def show_frame(*args):
     ret, frame = cap.read()
     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
