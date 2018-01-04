@@ -14,3 +14,6 @@ __pycache__/
 
 /video-analyser/video/
 /video-analyser/video/*
+
+/cam-gi-gtk/video/
+/cam-gi-gtk/video/*
