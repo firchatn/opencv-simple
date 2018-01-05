@@ -88,5 +88,8 @@ recordBut.connect("activate", record)
 popup = builder.get_object("about")
 popup.connect("activate", aboutInfo)
 
+rec = builder.get_object("record")
+rec.connect("activate", record)
+
 GLib.idle_add(show_frame)
 Gtk.main()

@@ -82,6 +82,14 @@
                 </child>
               </object>
             </child>
+            <child>
+              <object class="GtkMenuItem" id="record">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">record</property>
+                <property name="use_underline">True</property>
+              </object>
+            </child>
           </object>
           <packing>
             <property name="expand">False</property>
