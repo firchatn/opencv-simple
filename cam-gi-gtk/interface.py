@@ -6,8 +6,6 @@ from gi.repository import Gtk, Gdk, GLib, GdkPixbuf
 import time
 
 start = time.time()
-
-
 # icon record 
 imgf = cv2.imread('icon/record.png')
 # resize icon record
@@ -36,13 +34,13 @@ window.show_all()
 builder.connect_signals(Handler())
 
 
-def record(new_action):
+def record(recordBut):
     global record_on
     record_on = True
 
 def aboutInfo(popup):
     dialog = Gtk.MessageDialog(None, 0, Gtk.MessageType.INFO,
-            Gtk.ButtonsType.OK, "This is an INFO MessageDialog")
+            Gtk.ButtonsType.OK, "Recorder Info")
     dialog.format_secondary_text(
             """Press save to start record
             https://tik.tn
@@ -50,11 +48,7 @@ def aboutInfo(popup):
     dialog.run()
     dialog.destroy()
     
-new_action = builder.get_object("s")
-new_action.connect("activate", record)
 
-popup = builder.get_object("about")
-popup.connect("activate", aboutInfo)
     
 def show_frame(*args):
     ret, frame = cap.read()
@@ -85,6 +79,13 @@ def show_frame(*args):
                                         frame.shape[2]*frame.shape[1])                            
     image.set_from_pixbuf(pb.copy())
     return True
+
+
+recordBut = builder.get_object("s")
+recordBut.connect("activate", record)
+
+popup = builder.get_object("about")
+popup.connect("activate", aboutInfo)
 
 GLib.idle_add(show_frame)
 Gtk.main()
