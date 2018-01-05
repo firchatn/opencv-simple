@@ -3,6 +3,10 @@ import numpy as np
 import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gdk, GLib, GdkPixbuf
+import time
+
+start = time.time()
+
 
 # icon record 
 imgf = cv2.imread('icon/record.png')
@@ -44,7 +48,7 @@ new_action.connect("activate", record)
 def show_frame(*args):
     ret, frame = cap.read()
     img = frame
-    timer = '00:00'
+    timer = time.time() - start
     if record_on :
         out.write(frame)
         rows,cols,channels = resf.shape
@@ -57,7 +61,8 @@ def show_frame(*args):
         img2_fg = cv2.bitwise_and(resf,resf,mask = mask)
         dst = cv2.add(img1_bg,img2_fg)
         img[0:rows, 0:cols ] = dst
-        cv2.putText(img,timer, (25,25), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,255))
+        cv2.putText(img,str(timer), (25,25), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,255))
+        timer = time.time()
         
     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     pb = GdkPixbuf.Pixbuf.new_from_data(frame.tostring(),
