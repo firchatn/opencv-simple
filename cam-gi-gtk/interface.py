@@ -39,11 +39,22 @@ builder.connect_signals(Handler())
 def record(new_action):
     global record_on
     record_on = True
+
+def aboutInfo(popup):
+    dialog = Gtk.MessageDialog(None, 0, Gtk.MessageType.INFO,
+            Gtk.ButtonsType.OK, "This is an INFO MessageDialog")
+    dialog.format_secondary_text(
+            """Press save to start record
+            https://tik.tn
+            """)
+    dialog.run()
+    dialog.destroy()
     
 new_action = builder.get_object("s")
 new_action.connect("activate", record)
 
-
+popup = builder.get_object("about")
+popup.connect("activate", aboutInfo)
     
 def show_frame(*args):
     ret, frame = cap.read()
@@ -61,8 +72,8 @@ def show_frame(*args):
         img2_fg = cv2.bitwise_and(resf,resf,mask = mask)
         dst = cv2.add(img1_bg,img2_fg)
         img[0:rows, 0:cols ] = dst
-        cv2.putText(img,str(timer), (25,25), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,255))
-        timer = time.time()
+        cv2.putText(img,str(timer)[0:4], (25,25), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,255))
+        timer = time.time() - start 
         
     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     pb = GdkPixbuf.Pixbuf.new_from_data(frame.tostring(),
