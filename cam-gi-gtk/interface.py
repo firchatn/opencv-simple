@@ -1,13 +1,14 @@
 import cv2
 import numpy as np
 import gi
- 
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gdk, GLib, GdkPixbuf
 
+# icon record 
 imgf = cv2.imread('icon/record.png')
+# resize icon record
 resf = cv2.resize(imgf,None,fx=0.2, fy=0.2, interpolation = cv2.INTER_CUBIC)
-
+#open cam
 cap = cv2.VideoCapture(0)
 builder = Gtk.Builder()
 builder.add_from_file("layout.glade")
@@ -43,6 +44,7 @@ new_action.connect("activate", record)
 def show_frame(*args):
     ret, frame = cap.read()
     img = frame
+    timer = '00:00'
     if record_on :
         out.write(frame)
         rows,cols,channels = resf.shape
@@ -55,6 +57,7 @@ def show_frame(*args):
         img2_fg = cv2.bitwise_and(resf,resf,mask = mask)
         dst = cv2.add(img1_bg,img2_fg)
         img[0:rows, 0:cols ] = dst
+        cv2.putText(img,timer, (25,25), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,255))
         
     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     pb = GdkPixbuf.Pixbuf.new_from_data(frame.tostring(),
