@@ -66,7 +66,8 @@ def show_frame(*args):
         img2_fg = cv2.bitwise_and(resf,resf,mask = mask)
         dst = cv2.add(img1_bg,img2_fg)
         img[0:rows, 0:cols ] = dst
-        cv2.putText(img,str(timer)[0:4], (25,25), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,255))
+        cv2.putText(img,str(timer)[0:4], (25,25), cv2.FONT_HERSHEY_SIMPLEX, 1,
+                    (0,0,255))
         timer = time.time() - start 
         
     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
