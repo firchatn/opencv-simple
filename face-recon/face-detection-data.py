@@ -25,8 +25,8 @@ def doesFileExists(filePathAndName):
 if doesFileExists('data/sdata.json'):
     pass
 else:
-    statistics = {  'Firas' : 0 , 'Moez' : 0 , 'Med Ali' : 0 ,  'Moez 2' : 0 ,
-          'Moez 3' : 0 }
+    statistics = {  'Firas' : 1 , 'Moez' : 2 , 'Med Ali' : 3 ,  'Moez 2' : 4 ,
+          'Moez 3' : 4 }
     with open('data/sdata.json', 'w') as outfile:
         json.dump(statistics, outfile)
     
@@ -35,10 +35,17 @@ def count_data_in(name):
     pass
 
 def courbe_day():
-    
-    x = np.array([0,1,2,3])
-    y = np.array([20,21,22,23])
-    my_xticks = ['John','Arnold','Mavis','Matt']
+    listName = []
+    listValue = []
+    json_data=open("data/sdata.json")
+    jdata = json.load(json_data)
+
+    for key, value in jdata.items():
+        listName.append(key)
+        listValue.append(value)
+    x = np.array(listValue)
+    y = np.array( range(1,len(listName)*2,2))
+    my_xticks = listName
     plt.xticks(x, my_xticks)
     plt.plot(x, y)
     plt.show()
