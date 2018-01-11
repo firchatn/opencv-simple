@@ -4,6 +4,8 @@ import os
 import os.path
 from PIL import Image
 import json
+import pandas as pd
+import matplotlib.pyplot as plt
 
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 face_recognizer = cv2.face.createLBPHFaceRecognizer()
@@ -33,7 +35,14 @@ def count_data_in(name):
     pass
 
 def courbe_day():
-    pass
+    
+    x = np.array([0,1,2,3])
+    y = np.array([20,21,22,23])
+    my_xticks = ['John','Arnold','Mavis','Matt']
+    plt.xticks(x, my_xticks)
+    plt.plot(x, y)
+    plt.show()
+    
 
 def write_data_static():
     id= int(input('put id'))
