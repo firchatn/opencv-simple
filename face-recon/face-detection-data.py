@@ -59,7 +59,7 @@ def courbe_day():
     
 
 def write_data_static():
-    id = len(os.listdir('./data')) - 1
+    id = len(os.listdir('./data')) + 1
     nb = 0 
     while nb < 20:
         img = cv2.imread('../images/ali.jpg')
@@ -73,6 +73,7 @@ def write_data_static():
             cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),2)
             only_face = gray[y:y+h,x:x+w]
             cv2.imwrite("data/user"+str(id)+"/"+str(nb)+".jpg", only_face)
+            
     ch = input('name this person')
     with open("userinfo/user.json", "r") as jsonFile:
         docs = json.load(jsonFile)
@@ -84,7 +85,7 @@ def write_data_static():
 
 
 def write_data():
-    id = len(os.listdir('./data')) - 1
+    id = len(os.listdir('./data')) + 1 
     nb = 0 
     while 1:
         ret, img = cap.read()
@@ -101,9 +102,19 @@ def write_data():
         cv2.imshow('live video',img)
         cv2.waitKey(1)
         if nb == 20:
-            break
             cap.release()
             cv2.destroyAllWindows()
+            break
+            
+    ch = input('name this person')
+    with open("userinfo/user.json", "r") as jsonFile:
+        docs = json.load(jsonFile)
+        
+    docs[id] = ch
+
+    with open("userinfo/user.json", "w") as jsonFile:
+        json.dump(docs, jsonFile)
+
 
 def train_data():
     images = []
