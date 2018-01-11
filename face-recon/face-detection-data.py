@@ -41,13 +41,15 @@ def courbe_day():
     jdata = json.load(json_data)
 
     for key, value in jdata.items():
+        if value in listValue:
+            value+=1
         listName.append(key)
         listValue.append(value)
     x = np.array(listValue)
     y = np.array( range(1,len(listName)*2,2))
     my_xticks = listName
     plt.xticks(x, my_xticks)
-    plt.plot(x, y)
+    plt.plot(x, y//2)
     plt.show()
     
 
