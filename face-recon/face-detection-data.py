@@ -11,8 +11,8 @@ face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 face_recognizer = cv2.face.createLBPHFaceRecognizer()
 cap = cv2.VideoCapture(0)
 
-docs = { 1 : 'Firas' , 2 : 'Moez' , 3 : 'Med Ali' , 4 : 'Moez 2' ,
-         5 : 'Moez 3' }
+#docs = { 1 : 'Firas' , 2 : 'Moez' , 3 : 'Med Ali' , 4 : 'Moez 2' ,
+#        5 : 'Moez 3' }
 
 def doesFileExists(filePathAndName):
     return os.path.exists(filePathAndName)
@@ -21,19 +21,20 @@ def doesFileExists(filePathAndName):
 if doesFileExists('data/sdata.json'):
     pass
 else:
-    statistics = {  'Firas' : 1 , 'Moez' : 2 , 'Med Ali' : 3 ,  'Moez 2' : 4 ,
-          'Moez 3' : 4 }
+    statistics = {}
     with open('data/sdata.json', 'w') as outfile:
         json.dump(statistics, outfile)
-"""
+
 if doesFileExists('data/user.json'):
     pass
 else:
     docs = { 1 : 'Firas' , 2 : 'Moez' , 3 : 'Med Ali' , 4 : 'Moez 2' ,
-         5 : 'Moez 3' }
+     5 : 'Moez 3' }
     with open('data/user.json', 'w') as outfile:
-        json.dump(statistics, outfile)
-"""
+        json.dump(docs, outfile)
+
+
+
 
 def count_data_in(name):
     pass
@@ -72,6 +73,14 @@ def write_data_static():
             cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),2)
             only_face = gray[y:y+h,x:x+w]
             cv2.imwrite("data/user"+str(id)+"/"+str(nb)+".jpg", only_face)
+    ch = input('name this person')
+    with open("data/user.json", "r") as jsonFile:
+        docs = json.load(jsonFile)
+        
+    docs[id] = ch
+
+    with open("data/user.json", "w") as jsonFile:
+        json.dump(docs, jsonFile)
 
 
 def write_data():
