@@ -85,7 +85,14 @@ def write_data_static():
             only_face = gray[y:y+h,x:x+w]
             cv2.imwrite("data/user"+str(id)+"/"+str(nb)+".jpg", only_face)
             
-    ch = input('name this person')
+    while 1 :
+        choice = input('you know is person : yes/no')
+        if choice == 'yes' or choice == 'no':
+            break
+    if choice == 'yes':
+        ch = input('name this person')
+    else:
+        ch = 'inconnu'
     with open("userinfo/user.json", "r") as jsonFile:
         docs = json.load(jsonFile)
         
@@ -117,7 +124,14 @@ def write_data():
             cv2.destroyAllWindows()
             break
             
-    ch = input('name this person')
+    while 1 :
+        choice = input('you know is person : yes/no')
+        if choice == 'yes' or choice == 'no':
+            break
+    if choice == 'yes':
+        ch = input('name this person')
+    else:
+        ch = 'inconnu'
     with open("userinfo/user.json", "r") as jsonFile:
         docs = json.load(jsonFile)
         
