@@ -18,19 +18,19 @@ def doesFileExists(filePathAndName):
     return os.path.exists(filePathAndName)
   
 
-if doesFileExists('data/sdata.json'):
+if doesFileExists('userinfo/sdata.json'):
     pass
 else:
-    statistics = {}
-    with open('data/sdata.json', 'w') as outfile:
+    statistics = {"Firas": 1, "Moez": 2, "Med Ali": 3, "Moez 2": 4, "Moez 3": 4}
+    with open('userinfo/sdata.json', 'w') as outfile:
         json.dump(statistics, outfile)
 
-if doesFileExists('data/user.json'):
+if doesFileExists('userinfo/user.json'):
     pass
 else:
     docs = { 1 : 'Firas' , 2 : 'Moez' , 3 : 'Med Ali' , 4 : 'Moez 2' ,
      5 : 'Moez 3' }
-    with open('data/user.json', 'w') as outfile:
+    with open('userinfo/user.json', 'w') as outfile:
         json.dump(docs, outfile)
 
 
@@ -42,7 +42,7 @@ def count_data_in(name):
 def courbe_day():
     listName = []
     listValue = []
-    json_data=open("data/sdata.json")
+    json_data=open("userinfo/sdata.json")
     jdata = json.load(json_data)
 
     for key, value in jdata.items():
@@ -74,12 +74,12 @@ def write_data_static():
             only_face = gray[y:y+h,x:x+w]
             cv2.imwrite("data/user"+str(id)+"/"+str(nb)+".jpg", only_face)
     ch = input('name this person')
-    with open("data/user.json", "r") as jsonFile:
+    with open("userinfo/user.json", "r") as jsonFile:
         docs = json.load(jsonFile)
         
     docs[id] = ch
 
-    with open("data/user.json", "w") as jsonFile:
+    with open("userinfo/user.json", "w") as jsonFile:
         json.dump(docs, jsonFile)
 
 
