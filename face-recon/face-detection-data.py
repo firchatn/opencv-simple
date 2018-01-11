@@ -36,11 +36,15 @@ else:
 
 
 def count_data_in(name):
+    found  = False
     json_data=open("userinfo/sdata.json")
     jdata = json.load(json_data)
     for key, value in jdata.items():
         if name == key:
             jdata[key] += 1
+            found = True
+    if not found:
+        jdata[name] = 1
 
     with open("userinfo/sdata.json", "w") as jsonFile:
         json.dump(jdata, jsonFile)
