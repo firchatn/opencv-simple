@@ -11,22 +11,21 @@ face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 face_recognizer = cv2.face.createLBPHFaceRecognizer()
 cap = cv2.VideoCapture(0)
 
-#docs = { 1 : 'Firas' , 2 : 'Moez' , 3 : 'Med Ali' , 4 : 'Moez 2' ,
-#        5 : 'Moez 3' }
-
 def doesFileExists(filePathAndName):
     return os.path.exists(filePathAndName)
   
 
 if doesFileExists('userinfo/sdata.json'):
-    pass
+    json_data=open("userinfo/sdata.json")
+    statistics = json.load(json_data)
 else:
     statistics = {"Firas": 1, "Moez": 2, "Med Ali": 3, "Moez 2": 4, "Moez 3": 4}
     with open('userinfo/sdata.json', 'w') as outfile:
         json.dump(statistics, outfile)
 
 if doesFileExists('userinfo/user.json'):
-    pass
+    json_data=open("userinfo/user.json")
+    docs = json.load(json_data)
 else:
     docs = { 1 : 'Firas' , 2 : 'Moez' , 3 : 'Med Ali' , 4 : 'Moez 2' ,
      5 : 'Moez 3' }
@@ -37,7 +36,15 @@ else:
 
 
 def count_data_in(name):
-    pass
+    json_data=open("userinfo/sdata.json")
+    jdata = json.load(json_data)
+    for key, value in jdata.items():
+        if name == key:
+            jdata[key] += 1
+
+    with open("userinfo/sdata.json", "w") as jsonFile:
+        json.dump(jdata, jsonFile)
+            
 
 def courbe_day():
     listName = []
@@ -146,7 +153,7 @@ def recon_data():
         for(x,y,w,h) in faces:
             id_user, conf = face_recognizer.predict(gray[y:y+h,x:x+w])
             cv2.rectangle(im,(x-10,y-10),(x+w+10,y+h+10),(225,255,255),2)
-            name = docs[id_user]
+            name = docs[str(id_user)]
             count_data_in(name)
             cv2.putText(im,str(name), (x,y-15),
                         cv2.FONT_HERSHEY_SCRIPT_COMPLEX, 2, 25)

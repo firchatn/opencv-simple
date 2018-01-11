@@ -7,5 +7,4 @@ import numpy as np
 
 filename = skvideo.datasets.bigbuckbunny()
 filename_yuv = "video/outpy.avi"
-
 vid = skvideo.io.vread(filename)
