@@ -14,10 +14,6 @@ cap = cv2.VideoCapture(0)
 docs = { 1 : 'Firas' , 2 : 'Moez' , 3 : 'Med Ali' , 4 : 'Moez 2' ,
          5 : 'Moez 3' }
 
-#statistics = {  'Firas' : 0 , 'Moez' : 0 , 'Med Ali' : 0 ,  'Moez 2' : 0 ,
-#          'Moez 3' : 0 }
-
-
 def doesFileExists(filePathAndName):
     return os.path.exists(filePathAndName)
   
@@ -29,8 +25,16 @@ else:
           'Moez 3' : 4 }
     with open('data/sdata.json', 'w') as outfile:
         json.dump(statistics, outfile)
-    
-    
+"""
+if doesFileExists('data/user.json'):
+    pass
+else:
+    docs = { 1 : 'Firas' , 2 : 'Moez' , 3 : 'Med Ali' , 4 : 'Moez 2' ,
+         5 : 'Moez 3' }
+    with open('data/user.json', 'w') as outfile:
+        json.dump(statistics, outfile)
+"""
+
 def count_data_in(name):
     pass
 
@@ -54,7 +58,7 @@ def courbe_day():
     
 
 def write_data_static():
-    id= int(input('put id'))
+    id = len(os.listdir('./data')) - 1
     nb = 0 
     while nb < 20:
         img = cv2.imread('../images/ali.jpg')
@@ -71,7 +75,7 @@ def write_data_static():
 
 
 def write_data():
-    id= int(input('put id'))
+    id = len(os.listdir('./data')) - 1
     nb = 0 
     while 1:
         ret, img = cap.read()
