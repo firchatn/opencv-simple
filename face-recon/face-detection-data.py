@@ -3,12 +3,37 @@ import cv2
 import os
 import os.path
 from PIL import Image
+import json
 
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 face_recognizer = cv2.face.createLBPHFaceRecognizer()
 cap = cv2.VideoCapture(0)
 
-docs = { 1 : 'Firas' , 2 : 'Moez' , 3 : 'Med Ali' , 4 : 'Moez 2' , 5 : 'Moez 3' }
+docs = { 1 : 'Firas' , 2 : 'Moez' , 3 : 'Med Ali' , 4 : 'Moez 2' ,
+         5 : 'Moez 3' }
+
+#statistics = {  'Firas' : 0 , 'Moez' : 0 , 'Med Ali' : 0 ,  'Moez 2' : 0 ,
+#          'Moez 3' : 0 }
+
+
+def doesFileExists(filePathAndName):
+    return os.path.exists(filePathAndName)
+  
+
+if doesFileExists('data/sdata.json'):
+    pass
+else:
+    statistics = {  'Firas' : 0 , 'Moez' : 0 , 'Med Ali' : 0 ,  'Moez 2' : 0 ,
+          'Moez 3' : 0 }
+    with open('data/sdata.json', 'w') as outfile:
+        json.dump(statistics, outfile)
+    
+    
+def count_data_in(name):
+    pass
+
+def courbe_day():
+    pass
 
 def write_data_static():
     id= int(input('put id'))
@@ -80,7 +105,9 @@ def recon_data():
             id_user, conf = face_recognizer.predict(gray[y:y+h,x:x+w])
             cv2.rectangle(im,(x-10,y-10),(x+w+10,y+h+10),(225,255,255),2)
             name = docs[id_user]
-            cv2.putText(im,str(name), (x,y-15), cv2.FONT_HERSHEY_SCRIPT_COMPLEX, 2, 25)
+            count_data_in(name)
+            cv2.putText(im,str(name), (x,y-15),
+                        cv2.FONT_HERSHEY_SCRIPT_COMPLEX, 2, 25)
             cv2.imshow('im',im)
             cv2.waitKey(10)
 
