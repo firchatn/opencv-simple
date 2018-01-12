@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 face_recognizer = cv2.face.createLBPHFaceRecognizer()
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 
 def doesFileExists(filePathAndName):
     return os.path.exists(filePathAndName)
